@@ -303,7 +303,7 @@ async function run() {
 
   const expectedText = [
     ...visibleTextNodes(previewBody, { preview: true }),
-    'Meble do każdego wnętrza.', 'Zapytaj w salonie', 'MEBLE TINA', 'Telefon i e-mail', 'Pomieszczenia', '01 / 06',
+    'Meble do każdego wnętrza.', 'Zapytaj w salonie', 'MEBLE TINA', 'Telefon i e-mail', 'Pomieszczenia', '01 / 06', '01 / 21', '01 / 16', '01 / 09', '01 / 08',
     ...ROOMS.flatMap((room) => [room.name, room.description]),
     ...Object.values(ROOM_CAPTIONS).flatMap((captions) => Object.values(captions)),
     ...Object.values(PRODUCT_COPY).flatMap((product) => [product.title, product.description])
@@ -321,7 +321,7 @@ async function run() {
   const digitsRemainder = visibleText
     .replace(/1984/g, ' ')
     .replace(/Pomieszczenia\s*·\s*0[1-5]/g, ' ')
-    .replace(/\b0[1-6]\s*\/\s*0[1-6]\b/g, ' ')
+    .replace(/\b\d{2}\s*\/\s*\d{2}\b/g, ' ') // licznik slajdów NN / NN
     .replace(/162\/170/g, ' ')
     .replace(/\+48\s*504\s*473\s*577/g, ' ')
     .replace(/10\.00\s*[–-]\s*18\.00/g, ' ')
@@ -349,7 +349,7 @@ async function run() {
     `Liczby niedozwolone: ${extraDigits.length}.`,
     `Mobile 360 px: ${mobile.metrics ? `html ${mobile.metrics.rootScroll}/${mobile.metrics.rootClient}, body ${mobile.metrics.bodyScroll}/${mobile.metrics.bodyClient}` : 'pomiar niedostępny'}.`,
     'Wniosek: wariant A zachowuje jedną sekcję pomieszczeń z zakładkami; starsze karty kategorii pominięto.',
-    'LUKA: galeria przedpokoju nie ma nazw kolekcji w źródle; podpisy pozostają puste.',
+    'Wniosek: podpisy przedpokoju (LINATE, L\'HOMBRE, SLIM, HOME) przypisane wg kolejności zdjęć i opisów serii na stronie źródłowej.',
     ...notes.map((note) => `UWAGA: ${note}`),
     ...failures.map((failure) => `BŁĄD: ${failure}`)
   ];
