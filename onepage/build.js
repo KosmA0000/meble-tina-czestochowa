@@ -410,6 +410,13 @@ ${roomsSection}
  </div>
 </footer>
 ${renderCollectionModal(kolekcje)}
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Powiększone zdjęcie" hidden>
+ <button class="lb-x" type="button" data-lb-close aria-label="Zamknij"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+ <button class="kol-arr prev" type="button" data-lb-prev aria-label="Poprzednie zdjęcie">${chevronLeft}</button>
+ <figure class="lb-fig" data-lb-fig></figure>
+ <button class="kol-arr next" type="button" data-lb-next aria-label="Następne zdjęcie">${chevronRight}</button>
+ <span class="licz lb-licz" data-lb-count></span>
+</div>
 </body>
 </html>`;
 }
