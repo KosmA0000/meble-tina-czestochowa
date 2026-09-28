@@ -137,6 +137,7 @@
     const copyNode = slider.querySelector('[data-slide-copy]');
     const captionNode = slider.querySelector('[data-live-caption]');
     const countNode = slider.querySelector('[data-live-count]');
+    const kolButton = slider.querySelector('[data-kol-open]');
     let current = 0;
 
     function go(requested, animate = true, force = false) {
@@ -162,6 +163,11 @@
       if (copyNode && copyNode.textContent !== nextCopy) copyNode.textContent = nextCopy;
       if (captionNode) captionNode.textContent = photo.dataset.caption || '';
       if (countNode) countNode.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+      if (kolButton) {
+        const id = photo.dataset.kolekcja || '';
+        kolButton.hidden = !id;
+        kolButton.dataset.kolOpen = id;
+      }
       if (animate) {
         if (titleNode && nextTitle) animateChangedText(titleNode, 'heading');
         if (copyNode && nextCopy) animateChangedText(copyNode, 'text');
@@ -201,8 +207,10 @@
   }
 
   function initTabs() {
-    const tablist = document.querySelector('[role="tablist"]');
-    if (!tablist) return;
+    document.querySelectorAll('[role="tablist"]').forEach(initTablist);
+  }
+
+  function initTablist(tablist) {
     const tabs = [...tablist.querySelectorAll('[role="tab"]')];
     const panels = tabs.map((tab) => document.getElementById(tab.getAttribute('aria-controls')));
     let activeIndex = Math.max(0, tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true'));
@@ -245,6 +253,62 @@
       });
     });
     activate(activeIndex, false);
+  }
+
+  function initCollections() {
+    const modal = document.getElementById('kol-modal');
+    if (!modal) return;
+    const articles = [...modal.querySelectorAll('article.kol')];
+    const scroller = modal.querySelector('.kol-scroll');
+    const count = modal.querySelector('[data-kol-count]');
+    const closeButton = modal.querySelector('[data-kol-close]');
+    let current = -1;
+    let opener = null;
+
+    function show(index) {
+      current = (index + articles.length) % articles.length;
+      articles.forEach((article, i) => { article.hidden = i !== current; });
+      const article = articles[current];
+      modal.setAttribute('aria-labelledby', article.getAttribute('aria-labelledby'));
+      modal.removeAttribute('aria-label');
+      if (count) count.textContent = `${String(current + 1).padStart(2, '0')} / ${String(articles.length).padStart(2, '0')}`;
+      scroller.scrollTop = 0;
+    }
+    function open(id, trigger) {
+      const index = articles.findIndex((article) => article.id === `kol-${id}`);
+      if (index < 0) return;
+      opener = trigger || document.activeElement;
+      show(index);
+      modal.hidden = false;
+      document.body.classList.add('kol-open');
+      closeButton.focus();
+    }
+    function close() {
+      if (modal.hidden) return;
+      modal.hidden = true;
+      document.body.classList.remove('kol-open');
+      if (opener && opener.focus) opener.focus();
+    }
+
+    document.addEventListener('click', (event) => {
+      const trigger = event.target.closest('[data-kol-open]');
+      if (trigger && trigger.dataset.kolOpen) open(trigger.dataset.kolOpen, trigger);
+    });
+    closeButton.addEventListener('click', close);
+    modal.querySelector('[data-kol-prev]').addEventListener('click', () => show(current - 1));
+    modal.querySelector('[data-kol-next]').addEventListener('click', () => show(current + 1));
+    modal.addEventListener('click', (event) => { if (event.target === modal) close(); });
+    modal.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') { event.preventDefault(); close(); return; }
+      if (event.key === 'ArrowLeft') { event.preventDefault(); show(current - 1); return; }
+      if (event.key === 'ArrowRight') { event.preventDefault(); show(current + 1); return; }
+      if (event.key !== 'Tab') return;
+      const focusable = [...modal.querySelectorAll('button:not([hidden])')].filter((node) => node.offsetParent !== null);
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    });
   }
 
   function initMenu() {
@@ -315,6 +379,7 @@
     }
     document.querySelectorAll('[data-slider]').forEach(initSlider);
     initTabs();
+    initCollections();
     initMenu();
     initNavigation();
 

@@ -198,3 +198,42 @@ html.js .photo-cap{display:none}
 .top:not(.solid){background:linear-gradient(180deg,rgba(24,18,14,.82),rgba(24,18,14,0))}
 @media (max-width:1280px){.nav-dlugi .nav{display:none}.nav-dlugi .mbtn{display:inline-flex}}
 .top:not(.solid) .nav a{color:var(--ink);text-shadow:0 1px 10px rgba(0,0,0,.75)}
+/* kafelek „Więcej o kolekcji” */
+.akcje{display:flex;flex-wrap:wrap;gap:12px}
+.akcje [hidden]{display:none}
+body.kol-open{overflow:hidden}
+.kol-modal{position:fixed;inset:0;z-index:40;display:grid;place-items:center;padding:24px;background:rgba(12,9,7,.78);backdrop-filter:blur(6px)}
+.kol-modal[hidden]{display:none}
+.kol-box{position:relative;display:flex;flex-direction:column;width:min(1240px,100%);height:min(900px,100%);overflow:hidden;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--bg2);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.kol-top{display:flex;align-items:center;gap:16px;padding:18px 24px;border-bottom:1px solid var(--line)}
+.kol-top .btn svg{order:-1}
+.kol-top .licz{margin:0 0 0 auto}
+.kol-scroll{flex:1;overflow-y:auto;padding:40px 120px 56px;overscroll-behavior:contain}
+.kol-arr{position:absolute;top:50%;z-index:2;display:grid;place-items:center;width:72px;height:72px;padding:0;border:1px solid rgba(239,230,218,.3);border-radius:50%;background:rgba(24,18,14,.85);color:var(--ink);cursor:pointer;transform:translateY(-50%);transition:border-color .25s,color .25s}
+.kol-arr:hover{border-color:var(--gold);color:var(--gold)}
+.kol-arr svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.3}
+.kol-arr.prev{left:24px}
+.kol-arr.next{right:24px}
+.kol-head{display:grid;gap:14px;margin-bottom:28px}
+.kol-head h2{font:300 clamp(34px,4vw,56px)/1.05 var(--serif)}
+.kol-haslo{max-width:720px;color:var(--gold);font:400 clamp(20px,2vw,26px)/1.35 var(--serif);font-style:italic}
+.kol-opis{display:grid;gap:6px;max-width:760px;margin-bottom:36px;color:var(--muted)}
+.kol-opis .label{margin-top:10px;color:var(--ink)}
+.kol-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.kol-grid.el{grid-template-columns:repeat(4,minmax(0,1fr))}
+.kol-el{margin:36px 0 16px}
+.kol-foto{margin:0;overflow:hidden;border-radius:var(--r-md);background:var(--card)}
+.kol-foto img{width:100%;height:auto}
+.kol-foto.element{display:grid;place-items:center;aspect-ratio:4/3;padding:10px;background:#f4efe9}
+.kol-foto.element img{width:100%;height:100%;object-fit:contain}
+@media (max-width:900px){
+ .kol-modal{padding:8px}
+ .kol-box{height:100%}
+ .kol-top{padding:12px 14px}
+ .kol-scroll{padding:24px 16px 96px}
+ .kol-arr{top:auto;bottom:16px;width:56px;height:56px;transform:none}
+ .kol-arr.prev{left:16px}
+ .kol-arr.next{right:16px}
+ .kol-grid{grid-template-columns:1fr}
+ .kol-grid.el{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
