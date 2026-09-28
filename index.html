@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Meble Tina — meble, Częstochowa</title>
+<meta name="description" content="Meble Tina — salon meblowy w Częstochowie, ul. Bohaterów Katynia 162/170. Pokój dzienny, jadalnia, sypialnia, meble wypoczynkowe.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%2318120e%22/%3E%3Ctext x=%2232%22 y=%2247%22 text-anchor=%22middle%22 font-family=%22Georgia,serif%22 font-size=%2248%22 fill=%22%23c8a27a%22%3ET%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap&subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="assets/vendor/SplitText.min.js"></script>
+<script defer src="assets/js/main.js"></script>
+</head>
+<body>
+<header class="top" id="top">
+ <div class="wrap">
+  <a class="logo" href="#top"><span>MEBLE TINA</span><small>CZĘSTOCHOWA</small></a>
+  <nav class="nav" id="nav" aria-label="Nawigacja główna">
+   <a href="#pomieszczenia">Pomieszczenia</a>
+   <a href="#wypoczynkowe">Meble wypoczynkowe</a>
+   <a href="#kontakt">Kontakt</a>
+  </nav>
+  <div class="hbtns">
+   <a class="btn fill tel" href="tel:+48504473577" aria-label="Zadzwoń: +48 504 473 577"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5l2.6 3.4-1.7 2.4a12 12 0 007.2 7.2l2.4-1.7 3.4 2.6-1.3 3.1C11.8 21 3 12.2 3.5 4.8z"/></svg><span>Zadzwoń</span></a>
+   <button class="mbtn" id="mbtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mnav" data-label-closed="Menu" data-label-open="Zamknij">Menu</button>
+  </div>
+ </div>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu" aria-hidden="true">
+ <a href="#pomieszczenia">Pomieszczenia</a>
+   <a href="#wypoczynkowe">Meble wypoczynkowe</a>
+   <a href="#kontakt">Kontakt</a>
+ <a class="btn fill" href="tel:+48504473577">Zadzwoń · +48 504 473 577</a>
+</nav>
+
+<section class="hero" aria-labelledby="hero-title">
+ <img src="assets/img/1_hero/01_hero-naroznik-modulowy.jpg" alt="Narożnik modułowy w aranżacji salonu" width="1920" height="820" loading="eager" decoding="async" fetchpriority="high">
+ <div class="wrap"><div class="txt">
+  <div class="label" data-anim="label">Fabryka mebli tapicerowanych · od 1984</div>
+  <h1 id="hero-title" data-anim="heading" data-hero-title>Twój styl,<br>nasze wykonanie.</h1>
+  <p data-anim="text">Meble z myślą o twoim domu.</p>
+  <div class="btns"><a class="btn fill" href="#wypoczynkowe">Zobacz meble<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a><a class="btn" href="#kontakt">Kontakt</a></div>
+ </div></div>
+</section>
+
+<div class="cechy"><div class="wrap">
+ <div class="cecha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 5v8l-8 5-8-5V8z"/></svg><b>Profesjonalne wykończenie</b><span>Doświadczony zespół</span></div>
+ <div class="cecha"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg><b>Dbałość o każdy detal</b><span>Każdy element ma znaczenie</span></div>
+ <div class="cecha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15h16v4H4zM6 15V9a6 6 0 0112 0v6"/></svg><b>Stworzone z myślą o wygodzie</b><span>Komfort i radość każdego dnia</span></div>
+ <div class="cecha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V9l7-5 7 5v11zM10 20v-6h4v6"/></svg><b>Spełniamy marzenia</b><span>Twój styl, nasze wykonanie</span></div>
+</div></div>
+
+<main id="main">
+ <section class="sek" id="pomieszczenia" aria-labelledby="rooms-title">
+  <div class="wrap">
+   <div class="head"><div><div class="label" data-anim="label">Pomieszczenia</div><h2 id="rooms-title" data-anim="heading">Meble do<br>każdego wnętrza.</h2></div></div>
+   <div class="tabs" role="tablist" aria-label="Pomieszczenia"><button id="tab-pokoj-dzienny" type="button" role="tab" aria-controls="panel-pokoj-dzienny" aria-selected="true" tabindex="0">Pokój dzienny</button>
+<button id="tab-jadalnia" type="button" role="tab" aria-controls="panel-jadalnia" aria-selected="false" tabindex="-1">Jadalnia</button>
+<button id="tab-sypialnia" type="button" role="tab" aria-controls="panel-sypialnia" aria-selected="false" tabindex="-1">Sypialnia</button>
+<button id="tab-pokoj-dzieciecy" type="button" role="tab" aria-controls="panel-pokoj-dzieciecy" aria-selected="false" tabindex="-1">Pokój dziecięcy i młodzieżowy</button>
+<button id="tab-przedpokoj" type="button" role="tab" aria-controls="panel-przedpokoj" aria-selected="false" tabindex="-1">Przedpokój</button></div>
+   <div class="room-panels"><div id="panel-pokoj-dzienny" class="room-panel" role="tabpanel" aria-labelledby="tab-pokoj-dzienny"><div class="sl" data-slider role="region" aria-label="Pokój dzienny">
+    <div class="foto">
+      <div class="big" tabindex="0" role="group" aria-label="Zdjęcia: Pokój dzienny"><figure class="slide-photo is-active" data-title="Pokój dzienny" data-copy="Miejsce łączące styl z codziennym życiem." data-caption="kolekcja TORONTO"><img src="assets/img/4_galerie-pomieszczen/01_pokoj-dzienny/01_toronto.jpg" alt="Pokój dzienny" width="431" height="231" loading="lazy" decoding="async"><figcaption class="photo-cap">kolekcja TORONTO</figcaption></figure>
+<figure class="slide-photo" data-title="Pokój dzienny" data-copy="Miejsce łączące styl z codziennym życiem." data-caption="kolekcja SHETLAND"><img src="assets/img/4_galerie-pomieszczen/01_pokoj-dzienny/02_shetland.jpg" alt="Pokój dzienny" width="431" height="231" loading="lazy" decoding="async"><figcaption class="photo-cap">kolekcja SHETLAND</figcaption></figure>
+<figure class="slide-photo" data-title="Pokój dzienny" data-copy="Miejsce łączące styl z codziennym życiem." data-caption="kolekcja SUMMER"><img src="assets/img/4_galerie-pomieszczen/01_pokoj-dzienny/03_summer.jpg" alt="Pokój dzienny" width="431" height="231" loading="lazy" decoding="async"><figcaption class="photo-cap">kolekcja SUMMER</figcaption></figure>
+<figure class="slide-photo" data-title="Pokój dzienny" data-copy="Miejsce łączące styl z codziennym życiem." data-caption="kolekcja LINATE"><img src="assets/img/4_galerie-pomieszczen/01_pokoj-dzienny/04_linate.jpg" alt="Pokój dzienny" width="431" height="231" loading="lazy" decoding="async"><figcaption class="photo-cap">kolekcja LINATE</figcaption></figure>
+<figure class="slide-photo" data-title="Pokój dzienny" data-copy="Miejsce łączące styl z codziennym życiem." data-caption="kolekcja ARKO"><img src="assets/img/4_galerie-pomieszczen/01_pokoj-dzienny/05_arko.jpg" alt="Pokój dzienny" width="1274" height="714" loading="lazy" decoding="async"><figcaption class="photo-cap">kolekcja ARKO</figcaption></figure>
+<figure class="slide-photo" data-title="Pokój dzienny" data-copy="Miejsce łączące styl z codziennym życiem." data-caption="kolekcja CORTINA"><img src="assets/img/4_galerie-pomieszczen/01_pokoj-dzienny/06_cortina.jpg" alt="Pokój dzienny" width="1920" height="1080" loading="lazy" decoding="async"><figcaption class="photo-cap">kolekcja CORTINA</figcaption></figure></div>
+      <div class="thumbs"><button type="button" data-thumb-index="0" aria-label="Pokaż zdjęcie Pokój dzienny — kolekcja TORONTO" aria-pressed="true" tabindex="0"><img src="assets/img/4_galerie-pomieszczen/01_pokoj-dzienny/01_toronto.jpg" alt="Pokój dzienny" width="431" height="231" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="1" aria-label="Pokaż zdjęcie Pokój dzienny — kolekcja SHETLAND" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/01_pokoj-dzienny/02_shetland.jpg" alt="Pokój dzienny" width="431" height="231" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="2" aria-label="Pokaż zdjęcie Pokój dzienny — kolekcja SUMMER" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/01_pokoj-dzienny/03_summer.jpg" alt="Pokój dzienny" width="431" height="231" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="3" aria-label="Pokaż zdjęcie Pokój dzienny — kolekcja LINATE" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/01_pokoj-dzienny/04_linate.jpg" alt="Pokój dzienny" width="431" height="231" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="4" aria-label="Pokaż zdjęcie Pokój dzienny — kolekcja ARKO" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/01_pokoj-dzienny/05_arko.jpg" alt="Pokój dzienny" width="1274" height="714" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="5" aria-label="Pokaż zdjęcie Pokój dzienny — kolekcja CORTINA" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/01_pokoj-dzienny/06_cortina.jpg" alt="Pokój dzienny" width="1920" height="1080" loading="lazy" decoding="async"></button></div>
+    </div>
+    <div class="opis">
+      <div class="label" data-anim="label">Pomieszczenia · 01</div>
+      <h2 data-slide-title data-anim="heading">Pokój dzienny</h2>
+      <p data-slide-copy data-anim="text">Miejsce łączące styl z codziennym życiem.</p>
+      <div class="podpis" data-live-caption aria-live="polite" aria-atomic="true">kolekcja TORONTO</div>
+      <div class="ster">
+        <span class="licz" data-live-count aria-live="polite" aria-atomic="true">01 / 06</span>
+        <button class="arr" type="button" data-slide-prev aria-label="Poprzedni"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5.5-6.5 6.5 6.5 6.5"/></svg></button>
+        <button class="arr" type="button" data-slide-next aria-label="Następny"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5.5 6.5 6.5-6.5 6.5"/></svg></button>
+      </div>
+      <div><a class="btn" href="#kontakt">Zapytaj w salonie<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
+    </div>
+  </div></div>
+<div id="panel-jadalnia" class="room-panel" role="tabpanel" aria-labelledby="tab-jadalnia" hidden><div class="sl" data-slider role="region" aria-label="Jadalnia">
+    <div class="foto">
+      <div class="big" tabindex="0" role="group" aria-label="Zdjęcia: Jadalnia"><figure class="slide-photo is-active" data-title="Jadalnia" data-copy="Wspólny stół i przestrzeń, która sprzyja rozmowie." data-caption="jadalnia NAOMI"><img src="assets/img/4_galerie-pomieszczen/02_jadalnia/01_naomi.jpg" alt="Jadalnia" width="431" height="231" loading="lazy" decoding="async"><figcaption class="photo-cap">jadalnia NAOMI</figcaption></figure>
+<figure class="slide-photo" data-title="Jadalnia" data-copy="Wspólny stół i przestrzeń, która sprzyja rozmowie." data-caption="jadalnia NICOL"><img src="assets/img/4_galerie-pomieszczen/02_jadalnia/02_nicol.jpg" alt="Jadalnia" width="431" height="231" loading="lazy" decoding="async"><figcaption class="photo-cap">jadalnia NICOL</figcaption></figure>
+<figure class="slide-photo" data-title="Jadalnia" data-copy="Wspólny stół i przestrzeń, która sprzyja rozmowie." data-caption="jadalnia PELLO"><img src="assets/img/4_galerie-pomieszczen/02_jadalnia/03_pello.jpg" alt="Jadalnia" width="835" height="419" loading="lazy" decoding="async"><figcaption class="photo-cap">jadalnia PELLO</figcaption></figure>
+<figure class="slide-photo" data-title="Jadalnia" data-copy="Wspólny stół i przestrzeń, która sprzyja rozmowie." data-caption="jadalnia CORTINA"><img src="assets/img/4_galerie-pomieszczen/02_jadalnia/04_cortina.jpg" alt="Jadalnia" width="1175" height="688" loading="lazy" decoding="async"><figcaption class="photo-cap">jadalnia CORTINA</figcaption></figure>
+<figure class="slide-photo" data-title="Jadalnia" data-copy="Wspólny stół i przestrzeń, która sprzyja rozmowie." data-caption="jadalnia ARKO"><img src="assets/img/4_galerie-pomieszczen/02_jadalnia/05_arko.jpg" alt="Jadalnia" width="1274" height="714" loading="lazy" decoding="async"><figcaption class="photo-cap">jadalnia ARKO</figcaption></figure></div>
+      <div class="thumbs"><button type="button" data-thumb-index="0" aria-label="Pokaż zdjęcie Jadalnia — jadalnia NAOMI" aria-pressed="true" tabindex="0"><img src="assets/img/4_galerie-pomieszczen/02_jadalnia/01_naomi.jpg" alt="Jadalnia" width="431" height="231" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="1" aria-label="Pokaż zdjęcie Jadalnia — jadalnia NICOL" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/02_jadalnia/02_nicol.jpg" alt="Jadalnia" width="431" height="231" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="2" aria-label="Pokaż zdjęcie Jadalnia — jadalnia PELLO" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/02_jadalnia/03_pello.jpg" alt="Jadalnia" width="835" height="419" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="3" aria-label="Pokaż zdjęcie Jadalnia — jadalnia CORTINA" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/02_jadalnia/04_cortina.jpg" alt="Jadalnia" width="1175" height="688" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="4" aria-label="Pokaż zdjęcie Jadalnia — jadalnia ARKO" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/02_jadalnia/05_arko.jpg" alt="Jadalnia" width="1274" height="714" loading="lazy" decoding="async"></button></div>
+    </div>
+    <div class="opis">
+      <div class="label" data-anim="label">Pomieszczenia · 02</div>
+      <h2 data-slide-title data-anim="heading">Jadalnia</h2>
+      <p data-slide-copy data-anim="text">Wspólny stół i przestrzeń, która sprzyja rozmowie.</p>
+      <div class="podpis" data-live-caption aria-live="polite" aria-atomic="true">jadalnia NAOMI</div>
+      <div class="ster">
+        <span class="licz" data-live-count aria-live="polite" aria-atomic="true">01 / 05</span>
+        <button class="arr" type="button" data-slide-prev aria-label="Poprzedni"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5.5-6.5 6.5 6.5 6.5"/></svg></button>
+        <button class="arr" type="button" data-slide-next aria-label="Następny"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5.5 6.5 6.5-6.5 6.5"/></svg></button>
+      </div>
+      <div><a class="btn" href="#kontakt">Zapytaj w salonie<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
+    </div>
+  </div></div>
+<div id="panel-sypialnia" class="room-panel" role="tabpanel" aria-labelledby="tab-sypialnia" hidden><div class="sl" data-slider role="region" aria-label="Sypialnia">
+    <div class="foto">
+      <div class="big" tabindex="0" role="group" aria-label="Zdjęcia: Sypialnia"><figure class="slide-photo is-active" data-title="Sypialnia" data-copy="Wyciszenie i porządek na koniec dnia." data-caption="sypialnia LIONEL"><img src="assets/img/4_galerie-pomieszczen/03_sypialnia/01_lionel.jpg" alt="Sypialnia" width="1186" height="500" loading="lazy" decoding="async"><figcaption class="photo-cap">sypialnia LIONEL</figcaption></figure>
+<figure class="slide-photo" data-title="Sypialnia" data-copy="Wyciszenie i porządek na koniec dnia." data-caption="sypialnia NAOMI"><img src="assets/img/4_galerie-pomieszczen/03_sypialnia/02_naomi.jpg" alt="Sypialnia" width="1186" height="500" loading="lazy" decoding="async"><figcaption class="photo-cap">sypialnia NAOMI</figcaption></figure>
+<figure class="slide-photo" data-title="Sypialnia" data-copy="Wyciszenie i porządek na koniec dnia." data-caption="sypialnia NICOL"><img src="assets/img/4_galerie-pomieszczen/03_sypialnia/03_nicol.jpg" alt="Sypialnia" width="1186" height="500" loading="lazy" decoding="async"><figcaption class="photo-cap">sypialnia NICOL</figcaption></figure>
+<figure class="slide-photo" data-title="Sypialnia" data-copy="Wyciszenie i porządek na koniec dnia." data-caption="sypialnia LINATE"><img src="assets/img/4_galerie-pomieszczen/03_sypialnia/04_linate.jpg" alt="Sypialnia" width="578" height="357" loading="lazy" decoding="async"><figcaption class="photo-cap">sypialnia LINATE</figcaption></figure>
+<figure class="slide-photo" data-title="Sypialnia" data-copy="Wyciszenie i porządek na koniec dnia." data-caption="???ko ASPEN"><img src="assets/img/4_galerie-pomieszczen/03_sypialnia/05_aspen.jpg" alt="Sypialnia" width="578" height="357" loading="lazy" decoding="async"><figcaption class="photo-cap">???ko ASPEN</figcaption></figure>
+<figure class="slide-photo" data-title="Sypialnia" data-copy="Wyciszenie i porządek na koniec dnia." data-caption="???ko TOKYO"><img src="assets/img/4_galerie-pomieszczen/03_sypialnia/06_tokyo.jpg" alt="Sypialnia" width="578" height="357" loading="lazy" decoding="async"><figcaption class="photo-cap">???ko TOKYO</figcaption></figure></div>
+      <div class="thumbs"><button type="button" data-thumb-index="0" aria-label="Pokaż zdjęcie Sypialnia — sypialnia LIONEL" aria-pressed="true" tabindex="0"><img src="assets/img/4_galerie-pomieszczen/03_sypialnia/01_lionel.jpg" alt="Sypialnia" width="1186" height="500" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="1" aria-label="Pokaż zdjęcie Sypialnia — sypialnia NAOMI" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/03_sypialnia/02_naomi.jpg" alt="Sypialnia" width="1186" height="500" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="2" aria-label="Pokaż zdjęcie Sypialnia — sypialnia NICOL" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/03_sypialnia/03_nicol.jpg" alt="Sypialnia" width="1186" height="500" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="3" aria-label="Pokaż zdjęcie Sypialnia — sypialnia LINATE" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/03_sypialnia/04_linate.jpg" alt="Sypialnia" width="578" height="357" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="4" aria-label="Pokaż zdjęcie Sypialnia — ???ko ASPEN" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/03_sypialnia/05_aspen.jpg" alt="Sypialnia" width="578" height="357" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="5" aria-label="Pokaż zdjęcie Sypialnia — ???ko TOKYO" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/03_sypialnia/06_tokyo.jpg" alt="Sypialnia" width="578" height="357" loading="lazy" decoding="async"></button></div>
+    </div>
+    <div class="opis">
+      <div class="label" data-anim="label">Pomieszczenia · 03</div>
+      <h2 data-slide-title data-anim="heading">Sypialnia</h2>
+      <p data-slide-copy data-anim="text">Wyciszenie i porządek na koniec dnia.</p>
+      <div class="podpis" data-live-caption aria-live="polite" aria-atomic="true">sypialnia LIONEL</div>
+      <div class="ster">
+        <span class="licz" data-live-count aria-live="polite" aria-atomic="true">01 / 06</span>
+        <button class="arr" type="button" data-slide-prev aria-label="Poprzedni"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5.5-6.5 6.5 6.5 6.5"/></svg></button>
+        <button class="arr" type="button" data-slide-next aria-label="Następny"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5.5 6.5 6.5-6.5 6.5"/></svg></button>
+      </div>
+      <div><a class="btn" href="#kontakt">Zapytaj w salonie<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
+    </div>
+  </div></div>
+<div id="panel-pokoj-dzieciecy" class="room-panel" role="tabpanel" aria-labelledby="tab-pokoj-dzieciecy" hidden><div class="sl" data-slider role="region" aria-label="Pokój dziecięcy i młodzieżowy">
+    <div class="foto">
+      <div class="big" tabindex="0" role="group" aria-label="Zdjęcia: Pokój dziecięcy i młodzieżowy"><figure class="slide-photo is-active" data-title="Pokój dziecięcy i młodzieżowy" data-copy="Przestrzeń, która rośnie razem z domownikami." data-caption="kolekcja ANGEL"><img src="assets/img/4_galerie-pomieszczen/04_pokoj-dzieciecy/01_angel.jpg" alt="Pokój dziecięcy i młodzieżowy" width="431" height="231" loading="lazy" decoding="async"><figcaption class="photo-cap">kolekcja ANGEL</figcaption></figure>
+<figure class="slide-photo" data-title="Pokój dziecięcy i młodzieżowy" data-copy="Przestrzeń, która rośnie razem z domownikami." data-caption="kolekcja ANGEL"><img src="assets/img/4_galerie-pomieszczen/04_pokoj-dzieciecy/02_angel.jpg" alt="Pokój dziecięcy i młodzieżowy" width="431" height="231" loading="lazy" decoding="async"><figcaption class="photo-cap">kolekcja ANGEL</figcaption></figure>
+<figure class="slide-photo" data-title="Pokój dziecięcy i młodzieżowy" data-copy="Przestrzeń, która rośnie razem z domownikami." data-caption="kolekcja ANGEL"><img src="assets/img/4_galerie-pomieszczen/04_pokoj-dzieciecy/03_angel.jpg" alt="Pokój dziecięcy i młodzieżowy" width="431" height="231" loading="lazy" decoding="async"><figcaption class="photo-cap">kolekcja ANGEL</figcaption></figure>
+<figure class="slide-photo" data-title="Pokój dziecięcy i młodzieżowy" data-copy="Przestrzeń, która rośnie razem z domownikami." data-caption="kolekcja ANGEL"><img src="assets/img/4_galerie-pomieszczen/04_pokoj-dzieciecy/04_angel.jpg" alt="Pokój dziecięcy i młodzieżowy" width="431" height="231" loading="lazy" decoding="async"><figcaption class="photo-cap">kolekcja ANGEL</figcaption></figure>
+<figure class="slide-photo" data-title="Pokój dziecięcy i młodzieżowy" data-copy="Przestrzeń, która rośnie razem z domownikami." data-caption="kanapa TRIXI"><img src="assets/img/4_galerie-pomieszczen/04_pokoj-dzieciecy/05_trixi.jpg" alt="Pokój dziecięcy i młodzieżowy" width="461" height="231" loading="lazy" decoding="async"><figcaption class="photo-cap">kanapa TRIXI</figcaption></figure></div>
+      <div class="thumbs"><button type="button" data-thumb-index="0" aria-label="Pokaż zdjęcie Pokój dziecięcy i młodzieżowy — kolekcja ANGEL" aria-pressed="true" tabindex="0"><img src="assets/img/4_galerie-pomieszczen/04_pokoj-dzieciecy/01_angel.jpg" alt="Pokój dziecięcy i młodzieżowy" width="431" height="231" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="1" aria-label="Pokaż zdjęcie Pokój dziecięcy i młodzieżowy — kolekcja ANGEL" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/04_pokoj-dzieciecy/02_angel.jpg" alt="Pokój dziecięcy i młodzieżowy" width="431" height="231" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="2" aria-label="Pokaż zdjęcie Pokój dziecięcy i młodzieżowy — kolekcja ANGEL" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/04_pokoj-dzieciecy/03_angel.jpg" alt="Pokój dziecięcy i młodzieżowy" width="431" height="231" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="3" aria-label="Pokaż zdjęcie Pokój dziecięcy i młodzieżowy — kolekcja ANGEL" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/04_pokoj-dzieciecy/04_angel.jpg" alt="Pokój dziecięcy i młodzieżowy" width="431" height="231" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="4" aria-label="Pokaż zdjęcie Pokój dziecięcy i młodzieżowy — kanapa TRIXI" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/04_pokoj-dzieciecy/05_trixi.jpg" alt="Pokój dziecięcy i młodzieżowy" width="461" height="231" loading="lazy" decoding="async"></button></div>
+    </div>
+    <div class="opis">
+      <div class="label" data-anim="label">Pomieszczenia · 04</div>
+      <h2 data-slide-title data-anim="heading">Pokój dziecięcy i młodzieżowy</h2>
+      <p data-slide-copy data-anim="text">Przestrzeń, która rośnie razem z domownikami.</p>
+      <div class="podpis" data-live-caption aria-live="polite" aria-atomic="true">kolekcja ANGEL</div>
+      <div class="ster">
+        <span class="licz" data-live-count aria-live="polite" aria-atomic="true">01 / 05</span>
+        <button class="arr" type="button" data-slide-prev aria-label="Poprzedni"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5.5-6.5 6.5 6.5 6.5"/></svg></button>
+        <button class="arr" type="button" data-slide-next aria-label="Następny"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5.5 6.5 6.5-6.5 6.5"/></svg></button>
+      </div>
+      <div><a class="btn" href="#kontakt">Zapytaj w salonie<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
+    </div>
+  </div></div>
+<div id="panel-przedpokoj" class="room-panel" role="tabpanel" aria-labelledby="tab-przedpokoj" hidden><div class="sl" data-slider role="region" aria-label="Przedpokój">
+    <div class="foto">
+      <div class="big" tabindex="0" role="group" aria-label="Zdjęcia: Przedpokój"><figure class="slide-photo is-active" data-title="Przedpokój" data-copy="Pierwsze wrażenie, uporządkowane od pierwszego progu." data-caption=""><img src="assets/img/4_galerie-pomieszczen/05_przedpokoj/01_aranzacja.jpg" alt="Przedpokój" width="1175" height="688" loading="lazy" decoding="async"></figure>
+<figure class="slide-photo" data-title="Przedpokój" data-copy="Pierwsze wrażenie, uporządkowane od pierwszego progu." data-caption=""><img src="assets/img/4_galerie-pomieszczen/05_przedpokoj/02_aranzacja.jpg" alt="Przedpokój" width="850" height="601" loading="lazy" decoding="async"></figure>
+<figure class="slide-photo" data-title="Przedpokój" data-copy="Pierwsze wrażenie, uporządkowane od pierwszego progu." data-caption=""><img src="assets/img/4_galerie-pomieszczen/05_przedpokoj/03_aranzacja.jpg" alt="Przedpokój" width="543" height="600" loading="lazy" decoding="async"></figure>
+<figure class="slide-photo" data-title="Przedpokój" data-copy="Pierwsze wrażenie, uporządkowane od pierwszego progu." data-caption=""><img src="assets/img/4_galerie-pomieszczen/05_przedpokoj/04_aranzacja.jpg" alt="Przedpokój" width="580" height="580" loading="lazy" decoding="async"></figure></div>
+      <div class="thumbs"><button type="button" data-thumb-index="0" aria-label="Pokaż zdjęcie Przedpokój" aria-pressed="true" tabindex="0"><img src="assets/img/4_galerie-pomieszczen/05_przedpokoj/01_aranzacja.jpg" alt="Przedpokój" width="1175" height="688" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="1" aria-label="Pokaż zdjęcie Przedpokój" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/05_przedpokoj/02_aranzacja.jpg" alt="Przedpokój" width="850" height="601" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="2" aria-label="Pokaż zdjęcie Przedpokój" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/05_przedpokoj/03_aranzacja.jpg" alt="Przedpokój" width="543" height="600" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="3" aria-label="Pokaż zdjęcie Przedpokój" aria-pressed="false" tabindex="-1"><img src="assets/img/4_galerie-pomieszczen/05_przedpokoj/04_aranzacja.jpg" alt="Przedpokój" width="580" height="580" loading="lazy" decoding="async"></button></div>
+    </div>
+    <div class="opis">
+      <div class="label" data-anim="label">Pomieszczenia · 05</div>
+      <h2 data-slide-title data-anim="heading">Przedpokój</h2>
+      <p data-slide-copy data-anim="text">Pierwsze wrażenie, uporządkowane od pierwszego progu.</p>
+      <div class="podpis" data-live-caption aria-live="polite" aria-atomic="true"></div>
+      <div class="ster">
+        <span class="licz" data-live-count aria-live="polite" aria-atomic="true">01 / 04</span>
+        <button class="arr" type="button" data-slide-prev aria-label="Poprzedni"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5.5-6.5 6.5 6.5 6.5"/></svg></button>
+        <button class="arr" type="button" data-slide-next aria-label="Następny"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5.5 6.5 6.5-6.5 6.5"/></svg></button>
+      </div>
+      <div><a class="btn" href="#kontakt">Zapytaj w salonie<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
+    </div>
+  </div></div></div>
+  </div>
+ </section>
+ <section class="sek spot" id="wypoczynkowe" aria-label="Meble wypoczynkowe">
+  <div class="wrap">
+   <div class="sl" data-slider data-product="true" role="region" aria-label="Komplety wypoczynkowe">
+    <div class="foto">
+      <div class="big" tabindex="0" role="group" aria-label="Zdjęcia: Komplety wypoczynkowe"><figure class="slide-photo is-active" data-title="Komplety wypoczynkowe" data-copy="Miejsce, z którego aż nie chce się wstawać." data-caption=""><img src="assets/img/3_meble-wypoczynkowe/01_komplety-wypoczynkowe.jpg" alt="Komplety wypoczynkowe" width="292" height="292" loading="lazy" decoding="async"><figcaption class="product-fallback"><strong>Komplety wypoczynkowe</strong><span>Miejsce, z którego aż nie chce się wstawać.</span></figcaption></figure>
+<figure class="slide-photo" data-title="Narożniki" data-copy="Narożnik to komfortowy mebel przeznaczony przede wszystkim do wypoczynku." data-caption=""><img src="assets/img/3_meble-wypoczynkowe/03_narozniki.jpg" alt="Narożniki" width="292" height="292" loading="lazy" decoding="async"><figcaption class="product-fallback"><strong>Narożniki</strong><span>Narożnik to komfortowy mebel przeznaczony przede wszystkim do wypoczynku.</span></figcaption></figure>
+<figure class="slide-photo" data-title="Komplet BOSTON" data-copy="Miękkie linie i jasne obicie." data-caption=""><img src="assets/img/3_meble-wypoczynkowe/boston000.jpg" alt="Komplet BOSTON" width="461" height="231" loading="lazy" decoding="async"><figcaption class="product-fallback"><strong>Komplet BOSTON</strong><span>Miękkie linie i jasne obicie.</span></figcaption></figure>
+<figure class="slide-photo" data-title="Komplet TOKYO" data-copy="Wyraźny kontrast i czysta forma." data-caption=""><img src="assets/img/3_meble-wypoczynkowe/tokyo01.jpg" alt="Komplet TOKYO" width="461" height="231" loading="lazy" decoding="async"><figcaption class="product-fallback"><strong>Komplet TOKYO</strong><span>Wyraźny kontrast i czysta forma.</span></figcaption></figure>
+<figure class="slide-photo" data-title="Komplet TOKYO II" data-copy="Ta sama linia w innym zestawieniu." data-caption=""><img src="assets/img/3_meble-wypoczynkowe/tokyoII01.jpg" alt="Komplet TOKYO II" width="461" height="231" loading="lazy" decoding="async"><figcaption class="product-fallback"><strong>Komplet TOKYO II</strong><span>Ta sama linia w innym zestawieniu.</span></figcaption></figure>
+<figure class="slide-photo" data-title="Komplet TRENTO" data-copy="Prosta forma i spokojna tkanina." data-caption=""><img src="assets/img/3_meble-wypoczynkowe/TRENTO_komplet_461x231.jpg" alt="Komplet TRENTO" width="461" height="231" loading="lazy" decoding="async"><figcaption class="product-fallback"><strong>Komplet TRENTO</strong><span>Prosta forma i spokojna tkanina.</span></figcaption></figure></div>
+      <div class="thumbs"><button type="button" data-thumb-index="0" aria-label="Pokaż zdjęcie Komplety wypoczynkowe" aria-pressed="true" tabindex="0"><img src="assets/img/3_meble-wypoczynkowe/01_komplety-wypoczynkowe.jpg" alt="Komplety wypoczynkowe" width="292" height="292" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="1" aria-label="Pokaż zdjęcie Narożniki" aria-pressed="false" tabindex="-1"><img src="assets/img/3_meble-wypoczynkowe/03_narozniki.jpg" alt="Narożniki" width="292" height="292" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="2" aria-label="Pokaż zdjęcie Komplet BOSTON" aria-pressed="false" tabindex="-1"><img src="assets/img/3_meble-wypoczynkowe/boston000.jpg" alt="Komplet BOSTON" width="461" height="231" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="3" aria-label="Pokaż zdjęcie Komplet TOKYO" aria-pressed="false" tabindex="-1"><img src="assets/img/3_meble-wypoczynkowe/tokyo01.jpg" alt="Komplet TOKYO" width="461" height="231" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="4" aria-label="Pokaż zdjęcie Komplet TOKYO II" aria-pressed="false" tabindex="-1"><img src="assets/img/3_meble-wypoczynkowe/tokyoII01.jpg" alt="Komplet TOKYO II" width="461" height="231" loading="lazy" decoding="async"></button>
+<button type="button" data-thumb-index="5" aria-label="Pokaż zdjęcie Komplet TRENTO" aria-pressed="false" tabindex="-1"><img src="assets/img/3_meble-wypoczynkowe/TRENTO_komplet_461x231.jpg" alt="Komplet TRENTO" width="461" height="231" loading="lazy" decoding="async"></button></div>
+    </div>
+    <div class="opis">
+      <div class="label" data-anim="label">Meble wypoczynkowe</div>
+      <h2 data-slide-title data-anim="heading" data-product-title class="product-dynamic">Komplety wypoczynkowe</h2>
+      <p data-slide-copy data-anim="text" data-product-copy class="product-dynamic">Miejsce, z którego aż nie chce się wstawać.</p>
+      <div class="podpis" data-live-caption aria-live="polite" aria-atomic="true"></div>
+      <div class="ster">
+        <span class="licz" data-live-count aria-live="polite" aria-atomic="true">01 / 06</span>
+        <button class="arr" type="button" data-slide-prev aria-label="Poprzedni"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5.5-6.5 6.5 6.5 6.5"/></svg></button>
+        <button class="arr" type="button" data-slide-next aria-label="Następny"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5.5 6.5 6.5-6.5 6.5"/></svg></button>
+      </div>
+      <div><a class="btn" href="#kontakt">Zapytaj w salonie<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
+    </div>
+  </div>
+  </div>
+ </section>
+</main>
+
+<footer class="kontakt" id="kontakt">
+ <div class="wrap">
+  <div class="kgrid">
+   <div><div class="label" data-anim="label">Kontakt</div><h2 data-anim="heading">Zapraszamy<br>do salonu.</h2></div>
+   <div><div class="label" data-anim="label">Adres</div><p data-anim="text">ul. Bohaterów Katynia 162/170<br>Częstochowa</p><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Meble+Tina+Bohater%C3%B3w+Katynia+162+Cz%C4%99stochowa">Wyznacz trasę<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></div>
+   <div><div class="label" data-anim="label">Telefon i e-mail</div><p data-anim="text"><a href="tel:+48504473577">+48 504 473 577</a><br><a href="mailto:salon@mebletina.pl">salon@mebletina.pl</a></p></div>
+   <div><div class="label" data-anim="label">Godziny otwarcia</div><p data-anim="text">poniedziałek–piątek: 10.00–18.00<br>sobota: 10.00–14.00</p></div>
+  </div>
+  <div class="stopka"><span>© Meble Tina</span><a href="#top">do góry<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></a></div>
+ </div>
+</footer>
+</body>
+</html>
