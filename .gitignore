@@ -1,0 +1,12 @@
+# tylko strona i zdjęcia źródłowe
+/*
+!/.gitignore
+!/README.md
+!/onepage/
+!/do-ai/
+onepage/log-*.txt
+onepage/_kopia-*/
+onepage/.*chrome*/
+onepage/.playwright-mcp/
+onepage/podglad/img/
+node_modules/

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Meble Tina — podgląd układu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap&subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=5">
+</head>
+<body>
+<header class="top" id="top">
+ <div class="wrap">
+  <a class="logo" href="#">MEBLE TINA<small>CZĘSTOCHOWA</small></a>
+  <nav class="nav" id="nav"></nav>
+  <div class="hbtns"><a class="btn fill tel" href="tel:+48504473577" aria-label="Zadzwoń: +48 504 473 577"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5l2.6 3.4-1.7 2.4a12 12 0 007.2 7.2l2.4-1.7 3.4 2.6-1.3 3.1C11.8 21 3 12.2 3.5 4.8z"/></svg><span>Zadzwoń</span></a><button class="mbtn" id="mbtn" aria-label="Menu" aria-expanded="false" aria-controls="mnav">Menu</button></div>
+ </div>
+</header>
+<nav class="mnav" id="mnav" aria-label="Menu"></nav>
+
+<section class="hero">
+ <img src="img/1_hero/01_hero-naroznik-modulowy.jpg" alt="Narożnik modułowy w aranżacji salonu">
+ <div class="wrap"><div class="txt">
+  <div class="label">Fabryka mebli tapicerowanych · od 1984</div>
+  <h1>Twój styl,<br>nasze wykonanie.</h1>
+  <p>Meble z myślą o twoim domu.</p>
+  <div class="btns"><a class="btn fill" href="#wypoczynkowe">Zobacz meble →</a><a class="btn" href="#kontakt">Kontakt</a></div>
+ </div></div>
+</section>
+
+<div class="cechy"><div class="wrap">
+ <div class="cecha"><svg viewBox="0 0 24 24"><path d="M12 3l8 5v8l-8 5-8-5V8z"/></svg><b>Profesjonalne wykończenie</b><span>Doświadczony zespół</span></div>
+ <div class="cecha"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg><b>Dbałość o każdy detal</b><span>Każdy element ma znaczenie</span></div>
+ <div class="cecha"><svg viewBox="0 0 24 24"><path d="M4 15h16v4H4zM6 15V9a6 6 0 0112 0v6"/></svg><b>Stworzone z myślą o wygodzie</b><span>Komfort i radość każdego dnia</span></div>
+ <div class="cecha"><svg viewBox="0 0 24 24"><path d="M5 20V9l7-5 7 5v11zM10 20v-6h4v6"/></svg><b>Spełniamy marzenia</b><span>Twój styl, nasze wykonanie</span></div>
+</div></div>
+
+<main id="main"></main>
+
+<footer class="kontakt" id="kontakt"><div class="wrap">
+ <div class="kgrid">
+  <div><div class="label">Kontakt</div><h2>Zapraszamy<br>do salonu.</h2></div>
+  <div><div class="label">Adres</div><p>ul. Bohaterów Katynia 162/170<br>Częstochowa</p><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Meble+Tina+Bohater%C3%B3w+Katynia+162+Cz%C4%99stochowa">Wyznacz trasę →</a></div>
+  <div><div class="label">Telefon i e-mail</div><p><a href="tel:+48504473577">+48 504 473 577</a><br><a href="mailto:salon@mebletina.pl">salon@mebletina.pl</a></p></div>
+  <div><div class="label">Godziny otwarcia</div><p>poniedziałek–piątek: 10.00–18.00<br>sobota: 10.00–14.00</p></div>
+ </div>
+ <div class="stopka"><span>© Meble Tina</span><a href="#">do góry ↑</a></div>
+</div></footer>
+
+<div class="war" id="war"><a href="?w=a">Wariant A · zakładki</a><a href="?w=b">Wariant B · osobne sekcje</a></div>
+
+<script>
+const P='img/4_galerie-pomieszczen/';
+const ROOMS=[
+ {id:'pokoj-dzienny',n:'Pokój dzienny',t:'Miejsce łączące styl z codziennym życiem.',d:'01_pokoj-dzienny',f:[['01_toronto','kolekcja TORONTO'],['02_shetland','kolekcja SHETLAND'],['03_summer','kolekcja SUMMER'],['04_linate','kolekcja LINATE'],['05_arko','kolekcja ARKO'],['06_cortina','kolekcja CORTINA']]},
+ {id:'jadalnia',n:'Jadalnia',t:'Wspólny stół i przestrzeń, która sprzyja rozmowie.',d:'02_jadalnia',f:[['01_naomi','jadalnia NAOMI'],['02_nicol','jadalnia NICOL'],['03_pello','jadalnia PELLO'],['04_cortina','jadalnia CORTINA'],['05_arko','jadalnia ARKO']]},
+ {id:'sypialnia',n:'Sypialnia',t:'Wyciszenie i porządek na koniec dnia.',d:'03_sypialnia',f:[['01_lionel','sypialnia LIONEL'],['02_naomi','sypialnia NAOMI'],['03_nicol','sypialnia NICOL'],['04_linate','sypialnia LINATE'],['05_aspen','łóżko ASPEN'],['06_tokyo','łóżko TOKYO']]},
+ {id:'pokoj-dzieciecy',n:'Pokój dziecięcy i młodzieżowy',t:'Przestrzeń, która rośnie razem z domownikami.',d:'04_pokoj-dzieciecy',f:[['01_angel','kolekcja ANGEL'],['02_angel','kolekcja ANGEL'],['03_angel','kolekcja ANGEL'],['04_angel','kolekcja ANGEL'],['05_trixi','kanapa TRIXI']]},
+ {id:'przedpokoj',n:'Przedpokój',t:'Pierwsze wrażenie, uporządkowane od pierwszego progu.',d:'05_przedpokoj',f:[['01_aranzacja',''],['02_aranzacja',''],['03_aranzacja',''],['04_aranzacja','']]}
+];
+const W='img/3_meble-wypoczynkowe/';
+const WYP=[
+ [W+'01_komplety-wypoczynkowe.jpg','Komplety wypoczynkowe','Miejsce, z którego aż nie chce się wstawać.'],
+ [W+'03_narozniki.jpg','Narożniki','Narożnik to komfortowy mebel przeznaczony przede wszystkim do wypoczynku.'],
+ [W+'TRENTO_komplet_461x231.jpg','Komplet TRENTO','Prosta forma i spokojna tkanina.'],
+ [W+'boston000.jpg','Komplet BOSTON','Miękkie linie i jasne obicie.'],
+ [W+'tokyo01.jpg','Komplet TOKYO','Wyraźny kontrast i czysta forma.'],
+ [W+'tokyoII01.jpg','Komplet TOKYO II','Ta sama linia w innym zestawieniu.']
+];
+const pad=n=>String(n).padStart(2,'0');
+
+// jeden komponent slidera: items = [{src,alt,cap,title,txt}]
+function slider(items,{label,title,txt,rev,headTitle}){
+ const el=document.createElement('div');el.className='sl'+(rev?' rev':'');
+ el.innerHTML=`<div class="foto"><div class="big"></div><div class="thumbs"></div></div>
+  <div class="opis"><div class="label">${label}</div><h2></h2><p></p><div class="podpis"></div>
+  <div class="ster"><span class="licz"></span><button class="arr" aria-label="Poprzedni">‹</button><button class="arr" aria-label="Następny">›</button></div>
+  <div><a class="btn" href="#kontakt">Zapytaj w salonie →</a></div></div>`;
+ const big=el.querySelector('.big'),th=el.querySelector('.thumbs');
+ items.forEach((it,i)=>{const im=new Image();im.src=it.src;im.alt=it.alt;im.style.opacity=i?0:1;big.append(im);
+  const b=document.createElement('button');b.innerHTML=`<img src="${it.src}" alt="">`;b.onclick=()=>go(i);th.append(b)});
+ let cur=0;
+ function go(i){cur=(i+items.length)%items.length;[...big.children].forEach((im,k)=>im.style.opacity=k===cur?1:0);
+  [...th.children].forEach((b,k)=>b.classList.toggle('on',k===cur));const it=items[cur];
+  el.querySelector('h2').innerHTML=it.title||title;el.querySelector('p').textContent=it.txt||txt;
+  el.querySelector('.podpis').textContent=it.cap||'';el.querySelector('.licz').textContent=pad(cur+1)+' / '+pad(items.length)}
+ const [p,n]=el.querySelectorAll('.arr');p.onclick=()=>go(cur-1);n.onclick=()=>go(cur+1);
+ let x0=null;big.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
+ big.addEventListener('touchend',e=>{if(x0==null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(cur+(dx<0?1:-1));x0=null});
+ go(0);return el}
+const roomItems=r=>r.f.map(([f,c])=>({src:P+r.d+'/'+f+'.jpg',alt:r.n+(c?' — '+c:''),cap:c}));
+
+const w=new URLSearchParams(location.search).get('w')==='b'?'b':'a';
+document.querySelectorAll('#war a')[w==='a'?0:1].classList.add('on');
+const main=document.getElementById('main'),nav=document.getElementById('nav');
+let navLinks=[];
+
+if(w==='a'){
+ const s=document.createElement('section');s.className='sek';s.id='pomieszczenia';
+ s.innerHTML=`<div class="wrap"><div class="head"><div><div class="label">Pomieszczenia</div><h2>Meble do<br>każdego wnętrza.</h2></div></div><div class="tabs" role="tablist"></div><div class="panel"></div></div>`;
+ const tabs=s.querySelector('.tabs'),panel=s.querySelector('.panel');
+ ROOMS.forEach((r,i)=>{const b=document.createElement('button');b.textContent=r.n;b.onclick=()=>show(i);tabs.append(b)});
+ function show(i){[...tabs.children].forEach((b,k)=>b.classList.toggle('on',k===i));panel.replaceChildren(slider(roomItems(ROOMS[i]),{label:'Pomieszczenia · '+pad(i+1),title:ROOMS[i].n,txt:ROOMS[i].t}))}
+ show(0);main.append(s);navLinks.push(['pomieszczenia','Pomieszczenia']);
+}else{
+ ROOMS.forEach((r,i)=>{const s=document.createElement('section');s.className='sek'+(i%2?' alt':'');s.id=r.id;
+  const w=document.createElement('div');w.className='wrap';w.append(slider(roomItems(r),{label:'Pomieszczenia · '+pad(i+1),title:r.n,txt:r.t,rev:i%2}));s.append(w);main.append(s);navLinks.push([r.id,r.n.replace(' i młodzieżowy','')])});
+}
+const sw=document.createElement('section');sw.className='sek spot';sw.id='wypoczynkowe';
+const ww=document.createElement('div');ww.className='wrap';
+ww.append(slider(WYP.map(([src,t,d])=>({src,alt:t,title:t,txt:d})),{label:'Meble wypoczynkowe'}));sw.append(ww);main.append(sw);
+navLinks.push(['wypoczynkowe','Meble wypoczynkowe'],['kontakt','Kontakt']);
+nav.innerHTML=navLinks.map(([id,t])=>`<a href="#${id}">${t}</a>`).join('');
+
+const mnav=document.getElementById('mnav'),mbtn=document.getElementById('mbtn');
+mnav.innerHTML=navLinks.map(([id,t])=>`<a href="#${id}">${t}</a>`).join('')+'<a class="btn fill" href="tel:+48504473577">Zadzwoń · +48 504 473 577</a>';
+const menu=o=>{mnav.classList.toggle('open',o);mbtn.setAttribute('aria-expanded',o);mbtn.textContent=o?'Zamknij':'Menu';document.body.style.overflow=o?'hidden':''};
+mbtn.onclick=()=>menu(!mnav.classList.contains('open'));
+mnav.addEventListener('click',e=>{if(e.target.closest('a'))menu(false)});
+addEventListener('keydown',e=>{if(e.key==='Escape')menu(false)});
+const hdr=document.getElementById('top');
+addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40),{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)nav.querySelectorAll('a').forEach(a=>a.classList.toggle('on',a.hash==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+navLinks.forEach(([id])=>io.observe(document.getElementById(id)));
+</script>
+</body>
+</html>

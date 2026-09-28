@@ -1,0 +1,11 @@
+Status: PASS
+HTML: 0 błędów parse5; 65 znaczników img, wszystkie ze źródeł do-ai.
+Zdjęcia: 33/33 plików źródłowych użytych; pliki, alt i wymiary sprawdzone.
+Zakładki: 5 ról tab i 5 statycznych paneli.
+Kotwice: 0 uszkodzonych; tekst: 0 nadmiarowych słów.
+CSS: promienie i tokeny zaokrągleń sprawdzone; url(): brak.
+Liczby niedozwolone: 0.
+Mobile 360 px: html 360/360, body 360/360.
+Wniosek: wariant A zachowuje jedną sekcję pomieszczeń z zakładkami; starsze karty kategorii pominięto.
+LUKA: galeria przedpokoju nie ma nazw kolekcji w źródle; podpisy pozostają puste.
+UWAGA: HTML ma 65 znaczników img przy obecnych galeriach.
