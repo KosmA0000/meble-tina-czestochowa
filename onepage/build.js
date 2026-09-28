@@ -40,13 +40,12 @@ const ROOM_CAPTIONS = {
     '15_forest': "kolekcja FOREST",
     '16_forest': "kolekcja FOREST",
     '17_forest': "kolekcja FOREST",
-    '18_forest': "kolekcja FOREST",
-    '19_pello': "kolekcja PELLO",
-    '20_imperial': "kolekcja IMPERIAL",
+    '18_pello': "kolekcja PELLO",
+    '19_imperial': "kolekcja IMPERIAL",
+    '20_imperial-new': "kolekcja IMPERIAL NEW",
     '21_imperial-new': "kolekcja IMPERIAL NEW",
-    '22_imperial-new': "kolekcja IMPERIAL NEW",
-    '23_arko': "kolekcja ARKO",
-    '24_cortina': "kolekcja CORTINA"
+    '22_arko': "kolekcja ARKO",
+    '23_cortina': "kolekcja CORTINA"
   },
   'jadalnia': {
     '01_naomi': "jadalnia NAOMI",
@@ -55,10 +54,9 @@ const ROOM_CAPTIONS = {
     '04_pello': "jadalnia PELLO",
     '05_pello': "jadalnia PELLO",
     '06_imperial': "jadalnia IMPERIAL",
-    '07_imperial': "jadalnia IMPERIAL",
-    '08_linate': "jadalnia LINATE",
-    '09_cortina': "jadalnia CORTINA",
-    '10_arko': "jadalnia ARKO"
+    '07_linate': "jadalnia LINATE",
+    '08_cortina': "jadalnia CORTINA",
+    '09_arko': "jadalnia ARKO"
   },
   'sypialnia': {
     '04_naomi': "sypialnia NAOMI",
@@ -95,20 +93,13 @@ const ROOM_CAPTIONS = {
   },
   'przedpokoj': {}
 };
-const PRODUCT_COPY = {
-  '01_komplety-wypoczynkowe': {
-    title: 'Komplety wypoczynkowe',
-    description: 'Miejsce, z którego aż nie chce się wstawać.'
-  },
-  '03_narozniki': {
-    title: 'Narożniki',
-    description: 'Narożnik to komfortowy mebel przeznaczony przede wszystkim do wypoczynku.'
-  },
-  'TRENTO_komplet_461x231': { title: 'Komplet TRENTO', description: 'Prosta forma i spokojna tkanina.' },
-  'boston000': { title: 'Komplet BOSTON', description: 'Miękkie linie i jasne obicie.' },
-  'tokyo01': { title: 'Komplet TOKYO', description: 'Wyraźny kontrast i czysta forma.' },
-  'tokyoII01': { title: 'Komplet TOKYO II', description: 'Ta sama linia w innym zestawieniu.' }
+// jedyne zdania o grupach mebli wypoczynkowych ze źródła; reszta tekstu pochodzi z kolekcje.json
+const GROUP_COPY = {
+  'Komplety wypoczynkowe': 'Miejsce, z którego aż nie chce się wstawać.',
+  'Narożniki': 'Narożnik to komfortowy mebel przeznaczony przede wszystkim do wypoczynku.'
 };
+const UPHOLSTERED_GROUPS = ['Komplety wypoczynkowe', 'Narożniki', 'Sofy, kanapy, wersalki', 'Sofy MODUŁOWE'];
+const ROOM_PAGE = { 'pokoj-dzieciecy': 'pokoj-dzieciecy-i-mlodziezowy' };
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
@@ -225,7 +216,8 @@ function renderSlider({ label, title, description, items, product = false, rever
     const figureCaption = product
       ? `<figcaption class="product-fallback"><strong>${escapeHtml(itemTitle)}</strong>${itemDescription ? `<span>${escapeHtml(itemDescription)}</span>` : ''}</figcaption>`
       : caption ? `<figcaption class="photo-cap">${escapeHtml(caption)}</figcaption>` : '';
-    return `<figure class="slide-photo${activeClass}"${imageStyle} data-title="${escapeHtml(itemTitle)}" data-copy="${escapeHtml(itemDescription)}" data-caption="${escapeHtml(caption)}">${imageTag(item.image || item, item.alt)}${figureCaption}</figure>`;
+    const kolekcja = item.kolekcja ? ` data-kolekcja="${escapeHtml(item.kolekcja)}"` : '';
+    return `<figure class="slide-photo${activeClass}"${imageStyle} data-title="${escapeHtml(itemTitle)}" data-copy="${escapeHtml(itemDescription)}" data-caption="${escapeHtml(caption)}"${kolekcja}>${imageTag(item.image || item, item.alt)}${figureCaption}</figure>`;
   }).join('\n');
   const thumbnails = items.map((item, index) => {
     const name = item.title || title;
@@ -250,7 +242,7 @@ function renderSlider({ label, title, description, items, product = false, rever
         <button class="arr" type="button" data-slide-prev aria-label="Poprzedni">${chevronLeft}</button>
         <button class="arr" type="button" data-slide-next aria-label="Następny">${chevronRight}</button>
       </div>
-      <div><a class="btn" href="#kontakt">Zapytaj w salonie${arrowRight}</a></div>
+      <div class="akcje">${items.some((item) => item.kolekcja) ? `<button class="btn fill" type="button" data-kol-open="${escapeHtml(items[0].kolekcja || '')}" aria-haspopup="dialog"${items[0].kolekcja ? '' : ' hidden'}>Więcej o kolekcji${arrowRight}</button>` : ''}<a class="btn" href="#kontakt">Zapytaj w salonie${arrowRight}</a></div>
     </div>
   </div>`;
 }
@@ -269,20 +261,59 @@ function renderRoomPanel(room, index, active) {
   return `<div id="${panelId}" class="room-panel" role="tabpanel" aria-labelledby="${tabId}"${active ? '' : ' hidden'}>${slider}</div>`;
 }
 
-function renderProductTile(item, index) {
-  return `<button class="product-tile" type="button" data-slide-to="${index}" aria-pressed="${index === 0 ? 'true' : 'false'}">${imageTag(item.image || item, item.title)}<span>${escapeHtml(item.title)}</span></button>`;
+// meble wypoczynkowe: zakładka na grupę, w suwaku zdjęcia aranżacji kolejnych kolekcji obok siebie
+function renderUpholstered(kolekcje) {
+  const groups = UPHOLSTERED_GROUPS.map((name) => {
+    const items = kolekcje.filter((k) => k.grupa === name).flatMap((k) => {
+      const arr = k.zdjecia.filter((z) => z.rola === 'aranzacja');
+      return (arr.length ? arr : k.zdjecia.slice(0, 1)).map((z) => ({
+        ...z, alt: k.nazwa, title: name, description: GROUP_COPY[name] || '', caption: k.nazwa, kolekcja: k.id
+      }));
+    });
+    return { id: `wyp-${slugify(name)}`, name, items };
+  }).filter((group) => group.items.length);
+  const tabs = groups.map((group, index) => renderTab(group, index, index === 0)).join('\n');
+  const panels = groups.map((group, index) => `<div id="panel-${group.id}" class="room-panel wyp-panel" role="tabpanel" aria-labelledby="tab-${group.id}"${index ? ' hidden' : ''}>${renderSlider({ label: `Meble wypoczynkowe · ${String(index + 1).padStart(2, '0')}`, title: group.name, description: GROUP_COPY[group.name] || '', items: group.items })}</div>`).join('\n');
+  return `<div class="tabs" role="tablist" aria-label="Meble wypoczynkowe">${tabs}</div>
+   <div class="room-panels">${panels}</div>`;
 }
 
-function renderDocument({ hero, rooms, products, variant = 'a' }) {
+function slugify(value) {
+  return value.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ł/g, 'l').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+// kafelek „Więcej o kolekcji”: statyczny HTML, jedna karta na kolekcję, tekst 1:1 ze źródła
+function renderCollectionModal(kolekcje) {
+  const articles = kolekcje.map((k, index) => {
+    const opis = k.opis.map((line) => /^(MATERIAŁY?|KOLOR)\s*:?$/i.test(line)
+      ? `<div class="label">${escapeHtml(line.replace(/\s*:?$/, ''))}</div>`
+      : `<p>${escapeHtml(line)}</p>`).join('');
+    const figure = (z) => `<figure class="kol-foto ${z.rola}">${imageTag(z, k.nazwa)}</figure>`;
+    const aranzacje = k.zdjecia.filter((z) => z.rola === 'aranzacja');
+    const elementy = k.zdjecia.filter((z) => z.rola === 'element');
+    return `<article class="kol" id="kol-${escapeHtml(k.id)}" data-kol-index="${index}" aria-labelledby="kol-${escapeHtml(k.id)}-t" hidden>
+    <header class="kol-head"><div class="label">${escapeHtml(k.grupa)}</div><h2 id="kol-${escapeHtml(k.id)}-t">${escapeHtml(k.nazwa)}</h2>${k.haslo ? `<p class="kol-haslo">${escapeHtml(k.haslo)}</p>` : ''}</header>
+    ${opis ? `<div class="kol-opis">${opis}</div>` : ''}
+    ${aranzacje.length ? `<div class="kol-grid">${aranzacje.map(figure).join('')}</div>` : ''}
+    ${elementy.length ? `<div class="label kol-el">Elementy kolekcji</div><div class="kol-grid el">${elementy.map(figure).join('')}</div>` : ''}
+   </article>`;
+  }).join('\n');
+  return `<div class="kol-modal" id="kol-modal" role="dialog" aria-modal="true" aria-label="Kolekcja" hidden>
+ <div class="kol-box">
+  <div class="kol-top"><button class="btn" type="button" data-kol-close>${chevronLeft}Wróć</button><span class="licz" data-kol-count></span></div>
+  <button class="kol-arr prev" type="button" data-kol-prev aria-label="Poprzednia kolekcja">${chevronLeft}</button>
+  <button class="kol-arr next" type="button" data-kol-next aria-label="Następna kolekcja">${chevronRight}</button>
+  <div class="kol-scroll" tabindex="-1">
+   ${articles}
+  </div>
+ </div>
+</div>`;
+}
+
+function renderDocument({ hero, rooms, kolekcje, variant = 'a' }) {
   const roomTabs = rooms.map((room, index) => renderTab(room, index, index === 0)).join('\n');
   const roomPanels = rooms.map((room, index) => renderRoomPanel(room, index, index === 0)).join('\n');
-  const productItems = products.map((item) => ({
-    ...item,
-    title: PRODUCT_COPY[item.key]?.title || item.key,
-    description: PRODUCT_COPY[item.key]?.description || '',
-    alt: PRODUCT_COPY[item.key]?.title || item.key
-  }));
-  const productSlider = renderSlider({ label: 'Meble wypoczynkowe', title: productItems[0].title, items: productItems, product: true });
+  const productSlider = renderUpholstered(kolekcje);
   const navItems = variant === 'b'
     ? [...rooms.map((room) => [room.id, room.name.replace(' i młodzieżowy', '')]), ['wypoczynkowe', 'Meble wypoczynkowe'], ['kontakt', 'Kontakt']]
     : [['pomieszczenia', 'Pomieszczenia'], ['wypoczynkowe', 'Meble wypoczynkowe'], ['kontakt', 'Kontakt']];
@@ -378,6 +409,7 @@ ${roomsSection}
   <div class="stopka"><span>© Meble Tina</span><a href="#top">do góry${arrowUp}</a></div>
  </div>
 </footer>
+${renderCollectionModal(kolekcje)}
 </body>
 </html>`;
 }
@@ -395,13 +427,6 @@ async function ensureVendors() {
   }
 }
 
-function sortProducts(a, b) {
-  const aNumeric = /^\d/.test(a.key);
-  const bNumeric = /^\d/.test(b.key);
-  if (aNumeric !== bNumeric) return aNumeric ? -1 : 1;
-  return compareName(a.key, b.key) || compareRelative(a, b);
-}
-
 async function build() {
   if (!fs.existsSync(SOURCE)) throw new Error(`Brak katalogu źródłowego: ${SOURCE}`);
   await ensureVendors();
@@ -412,9 +437,16 @@ async function build() {
   if (!heroFiles.length) throw new Error('Katalog 1_hero nie zawiera zdjęcia bohatera.');
   const hero = copyImage(heroFiles[0]);
 
-  const productFiles = listImages('3_meble-wypoczynkowe').sort(sortProducts);
-  if (!productFiles.length) throw new Error('Katalog 3_meble-wypoczynkowe nie zawiera zdjęć.');
-  const products = productFiles.map((record) => ({ ...copyImage(record), key: record.key }));
+  // kolekcje ze strony źródłowej (do-ai/5_kolekcje/kolekcje.json); PARIS ma tylko nagłówek „wymiary:” bez treści (wymiary są na grafice)
+  const kolekcjeRaw = JSON.parse(fs.readFileSync(path.join(SOURCE, '5_kolekcje', 'kolekcje.json'), 'utf8'));
+  const kolekcje = kolekcjeRaw.map((k) => ({
+    ...k,
+    opis: k.opis.length === 1 && /^wymiary:?$/i.test(k.opis[0]) ? [] : k.opis,
+    zdjecia: k.zdjecia.map((z) => {
+      const fullPath = path.join(SOURCE, '5_kolekcje', k.id, z.plik);
+      return { ...copyImage({ fullPath, name: z.plik, key: path.basename(z.plik, path.extname(z.plik)) }), rola: z.rola };
+    })
+  }));
 
   const rooms = ROOMS.map((room) => {
     const files = listImages(room.folder).sort(compareRelative);
@@ -422,12 +454,13 @@ async function build() {
       ...room,
       items: files.map((record) => ({
         ...copyImage(record),
-        caption: ROOM_CAPTIONS[room.id]?.[record.key] || ''
+        caption: ROOM_CAPTIONS[room.id]?.[record.key] || '',
+        kolekcja: kolekcje.find((k) => k.pokoj === (ROOM_PAGE[room.id] || room.id) && k.nazwa === ROOM_CAPTIONS[room.id]?.[record.key])?.id || ''
       }))
     };
   }).filter((room) => room.items.length > 0);
 
-  const html = renderDocument({ hero, rooms, products });
+  const html = renderDocument({ hero, rooms, kolekcje });
   const cssSource = path.join(ROOT, 'style.css');
   const jsSource = path.join(ROOT, 'main.js');
   if (!fs.existsSync(cssSource) || !fs.existsSync(jsSource)) throw new Error('Brak źródła style.css lub main.js w onepage/.');
@@ -441,10 +474,10 @@ async function build() {
   const DIST_B = path.join(ROOT, 'dist-b');
   fs.rmSync(DIST_B, { recursive: true, force: true });
   fs.cpSync(DIST, DIST_B, { recursive: true });
-  fs.writeFileSync(path.join(DIST_B, 'index.html'), renderDocument({ hero, rooms, products, variant: 'b' }), 'utf8');
+  fs.writeFileSync(path.join(DIST_B, 'index.html'), renderDocument({ hero, rooms, kolekcje, variant: 'b' }), 'utf8');
 
-  const imageCount = 1 + products.length + rooms.reduce((total, room) => total + room.items.length, 0);
-  console.log(`Zbudowano onepage/dist: ${rooms.length} zakładek, ${products.length} mebli wypoczynkowych, ${imageCount} zdjęć.`);
+  const imageCount = 1 + kolekcje.reduce((total, k) => total + k.zdjecia.length, 0) + rooms.reduce((total, room) => total + room.items.length, 0);
+  console.log(`Zbudowano onepage/dist: ${rooms.length} zakładek, ${kolekcje.length} kolekcji, ${imageCount} zdjęć.`);
   console.log('Wniosek: zachowano wariant A; sekcja kart kategorii ze starszej specyfikacji nie wchodzi do finalnego briefu.');
   console.log('LUKA: zdjęcia przedpokoju nie mają przypisanych nazw kolekcji, więc ich podpisy pozostają puste.');
 }
@@ -456,4 +489,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { build, ROOMS, ROOM_CAPTIONS, PRODUCT_COPY, imageDimensions };
+module.exports = { build, ROOMS, ROOM_CAPTIONS, GROUP_COPY, UPHOLSTERED_GROUPS, imageDimensions };

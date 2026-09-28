@@ -5,7 +5,7 @@ const path = require('node:path');
 const vm = require('node:vm');
 const { spawn, execFileSync } = require('node:child_process');
 const parse5 = require(path.resolve(__dirname, '..', 'zrodlo', 'node_modules', 'parse5'));
-const { ROOMS, ROOM_CAPTIONS, PRODUCT_COPY, imageDimensions } = require('./build.js');
+const { ROOMS, ROOM_CAPTIONS, GROUP_COPY, UPHOLSTERED_GROUPS, imageDimensions } = require('./build.js');
 
 const ROOT = __dirname;
 const SOURCE = path.join(ROOT, '..', 'do-ai');
@@ -15,6 +15,7 @@ const CSS_FILE = path.join(DIST, 'assets', 'css', 'style.css');
 const JS_FILE = path.join(DIST, 'assets', 'js', 'main.js');
 const REPORT_FILE = path.join(ROOT, 'verify-wynik.txt');
 const EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp']);
+const KOLEKCJE = JSON.parse(fs.readFileSync(path.join(SOURCE, '5_kolekcje', 'kolekcje.json'), 'utf8'));
 const failures = [];
 const notes = [];
 
@@ -249,10 +250,9 @@ async function run() {
     if (normalized.startsWith('1_hero/')) {
       if (at.alt !== 'Narożnik modułowy w aranżacji salonu') badImageAttrs.push(`${at.src}: błędny alt hero`);
       if (at.fetchpriority !== 'high') badImageAttrs.push(`${at.src}: hero bez fetchpriority="high"`);
-    } else if (normalized.startsWith('3_meble-wypoczynkowe/')) {
-      const key = path.basename(relative, path.extname(relative));
-      const expectedAlt = PRODUCT_COPY[key]?.title || key;
-      if (at.alt !== expectedAlt) badImageAttrs.push(`${at.src}: alt powinien brzmieć „${expectedAlt}”`);
+    } else if (normalized.startsWith('5_kolekcje/')) {
+      const kol = KOLEKCJE.find((k) => k.id === normalized.split('/')[1]);
+      if (!kol || at.alt !== kol.nazwa) badImageAttrs.push(`${at.src}: alt powinien być nazwą kolekcji`);
     } else if (normalized.startsWith('4_galerie-pomieszczen/')) {
       const folder = normalized.split('/')[1];
       const room = ROOMS.find((entry) => entry.folder.endsWith(folder));
@@ -261,7 +261,8 @@ async function run() {
   }
   if (badImageAttrs.length) fail(`Problemy z obrazami: ${badImageAttrs.slice(0, 8).join('; ')}`);
 
-  const sourceFiles = sourceImages(SOURCE);
+  // 3_meble-wypoczynkowe zastąpione przez 5_kolekcje (te same meble, pełne kolekcje ze źródła)
+  const sourceFiles = sourceImages(SOURCE).filter((file) => !path.relative(SOURCE, file).startsWith('3_meble-wypoczynkowe'));
   const expectedSourcePaths = new Set(sourceFiles.map((file) => path.relative(SOURCE, file).toLocaleLowerCase('en')));
   const unusedSourceImages = [...expectedSourcePaths].filter((file) => !usedSourcePaths.has(file));
   if (unusedSourceImages.length) fail(`Nieużyte zdjęcia źródłowe: ${unusedSourceImages.join(', ')}`);
@@ -278,10 +279,12 @@ async function run() {
   const tabs = htmlInfo.nodes.filter((node) => node.tagName === 'button' && attrs(node).role === 'tab');
   const panels = htmlInfo.nodes.filter((node) => classes(node).has('room-panel'));
   const expectedRooms = ROOMS.filter((room) => sourceImages(path.join(SOURCE, room.folder)).length > 0);
-  if (tabs.length !== expectedRooms.length || panels.length !== expectedRooms.length) {
-    fail(`Zakładki/panele pomieszczeń nie zgadzają się ze źródłami (${tabs.length}/${panels.length}, oczekiwano ${expectedRooms.length}).`);
+  const expectedTabs = expectedRooms.length + UPHOLSTERED_GROUPS.filter((g) => KOLEKCJE.some((k) => k.grupa === g)).length;
+  const tablists = htmlInfo.nodes.filter((node) => attrs(node).role === 'tablist').length;
+  if (tabs.length !== expectedTabs || panels.length !== expectedTabs) {
+    fail(`Zakładki/panele nie zgadzają się ze źródłami (${tabs.length}/${panels.length}, oczekiwano ${expectedTabs}).`);
   }
-  if (panels.filter((panel) => Object.prototype.hasOwnProperty.call(attrs(panel), 'hidden')).length !== Math.max(0, panels.length - 1)) {
+  if (panels.filter((panel) => Object.prototype.hasOwnProperty.call(attrs(panel), 'hidden')).length !== Math.max(0, panels.length - tablists)) {
     fail('Początkowy stan paneli nie ukrywa wszystkich poza pierwszym.');
   }
 
@@ -306,28 +309,42 @@ async function run() {
     'Meble do każdego wnętrza.', 'Zapytaj w salonie', 'MEBLE TINA', 'Telefon i e-mail', 'Pomieszczenia', '01 / 06',
     ...ROOMS.flatMap((room) => [room.name, room.description]),
     ...Object.values(ROOM_CAPTIONS).flatMap((captions) => Object.values(captions)),
-    ...Object.values(PRODUCT_COPY).flatMap((product) => [product.title, product.description])
+    ...Object.values(GROUP_COPY), ...UPHOLSTERED_GROUPS, 'Meble wypoczynkowe', 'Więcej o kolekcji', 'Wróć', 'Elementy kolekcji',
+    ...KOLEKCJE.flatMap((k) => [k.nazwa, k.grupa, k.haslo, ...k.opis])
   ];
   for (const room of ROOMS) expectedText.push(`01 / ${String(sourceImages(path.join(SOURCE, room.folder)).length).padStart(2, '0')}`); // liczniki slajdów
-  const productSourceFolder = path.join(SOURCE, '3_meble-wypoczynkowe');
-  for (const file of sourceImages(productSourceFolder)) {
-    const key = path.basename(file, path.extname(file));
-    expectedText.push(PRODUCT_COPY[key]?.title || key);
+  for (const g of UPHOLSTERED_GROUPS) { // liczniki suwaków mebli wypoczynkowych
+    const n = KOLEKCJE.filter((k) => k.grupa === g).reduce((t, k) => t + (k.zdjecia.filter((z) => z.rola === 'aranzacja').length || 1), 0);
+    if (n) expectedText.push(`01 / ${String(n).padStart(2, '0')}`);
   }
   const allowedWords = new Set(words(expectedText.join(' ')));
   const visibleText = visibleTextNodes(pageBody).join(' ').replace(/\s+/g, ' ').trim();
   const extras = [...new Set(words(visibleText).filter((word) => !allowedWords.has(word)))].sort(compareWords);
   if (extras.length) fail(`Nadmiarowe słowa w widocznym tekście: ${extras.join(', ')}`);
+  // kafelek kolekcji jest ukryty do kliknięcia: każde słowo i każda liczba muszą pochodzić ze źródła
+  const modal = htmlInfo.nodes.find((node) => attrs(node).id === 'kol-modal');
+  if (!modal) fail('Brak kafelka kolekcji.');
+  const modalText = modal ? textOf(modal).replace(/\s+/g, ' ').trim() : '';
+  const modalExtras = [...new Set(words(modalText).filter((word) => !allowedWords.has(word)))];
+  if (modalExtras.length) fail(`Nadmiarowe słowa w kafelku kolekcji: ${modalExtras.join(', ')}`);
+  const articles = htmlInfo.nodes.filter((node) => node.tagName === 'article' && classes(node).has('kol'));
+  if (articles.length !== KOLEKCJE.length) fail(`Kafelek ma ${articles.length} kolekcji zamiast ${KOLEKCJE.length}.`);
+  const openers = new Set(htmlInfo.nodes.filter((node) => attrs(node)['data-kolekcja']).map((node) => attrs(node)['data-kolekcja']));
+  const missingOpeners = KOLEKCJE.filter((k) => !openers.has(k.id)).map((k) => k.nazwa);
+  if (missingOpeners.length) notes.push(`Kolekcje bez slajdu na stronie (dostępne strzałkami w kafelku): ${missingOpeners.join(', ')}`);
 
   const digitsRemainder = visibleText
     .replace(/1984/g, ' ')
     .replace(/Pomieszczenia\s*·\s*0[1-5]/g, ' ')
+    .replace(/Meble wypoczynkowe\s*·\s*0[1-4]/g, ' ')
     .replace(/\b\d{2}\s*\/\s*\d{2}\b/g, ' ') // licznik slajdów NN / NN
     .replace(/162\/170/g, ' ')
     .replace(/\+48\s*504\s*473\s*577/g, ' ')
     .replace(/10\.00\s*[–-]\s*18\.00/g, ' ')
     .replace(/10\.00\s*[–-]\s*14\.00/g, ' ');
-  const extraDigits = digitsRemainder.match(/\d+/g) || [];
+  let fromSource = digitsRemainder + ' ' + modalText;
+  for (const text of KOLEKCJE.flatMap((k) => [k.nazwa, k.haslo, ...k.opis]).filter(Boolean).sort((a, b) => b.length - a.length)) fromSource = fromSource.split(text.replace(/\s+/g, ' ').trim()).join(' ');
+  const extraDigits = fromSource.match(/\d+/g) || [];
   if (extraDigits.length) fail(`Niedozwolone liczby w widocznym tekście: ${extraDigits.join(', ')}`);
 
   const title = htmlInfo.nodes.find((node) => node.tagName === 'title');
