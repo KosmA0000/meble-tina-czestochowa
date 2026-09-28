@@ -303,11 +303,12 @@ async function run() {
 
   const expectedText = [
     ...visibleTextNodes(previewBody, { preview: true }),
-    'Meble do każdego wnętrza.', 'Zapytaj w salonie', 'MEBLE TINA', 'Telefon i e-mail', 'Pomieszczenia', '01 / 06', '01 / 21', '01 / 16', '01 / 09', '01 / 08',
+    'Meble do każdego wnętrza.', 'Zapytaj w salonie', 'MEBLE TINA', 'Telefon i e-mail', 'Pomieszczenia', '01 / 06',
     ...ROOMS.flatMap((room) => [room.name, room.description]),
     ...Object.values(ROOM_CAPTIONS).flatMap((captions) => Object.values(captions)),
     ...Object.values(PRODUCT_COPY).flatMap((product) => [product.title, product.description])
   ];
+  for (const room of ROOMS) expectedText.push(`01 / ${String(sourceImages(path.join(SOURCE, room.folder)).length).padStart(2, '0')}`); // liczniki slajdów
   const productSourceFolder = path.join(SOURCE, '3_meble-wypoczynkowe');
   for (const file of sourceImages(productSourceFolder)) {
     const key = path.basename(file, path.extname(file));
@@ -349,7 +350,7 @@ async function run() {
     `Liczby niedozwolone: ${extraDigits.length}.`,
     `Mobile 360 px: ${mobile.metrics ? `html ${mobile.metrics.rootScroll}/${mobile.metrics.rootClient}, body ${mobile.metrics.bodyScroll}/${mobile.metrics.bodyClient}` : 'pomiar niedostępny'}.`,
     'Wniosek: wariant A zachowuje jedną sekcję pomieszczeń z zakładkami; starsze karty kategorii pominięto.',
-    'Wniosek: podpisy przedpokoju (LINATE, L\'HOMBRE, SLIM, HOME) przypisane wg kolejności zdjęć i opisów serii na stronie źródłowej.',
+    'LUKA: galeria przedpokoju nie ma nazw kolekcji w źródle; podpisy pozostają puste.',
     ...notes.map((note) => `UWAGA: ${note}`),
     ...failures.map((failure) => `BŁĄD: ${failure}`)
   ];

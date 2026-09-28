@@ -1,12 +1,12 @@
 Status: PASS
-HTML: 0 błędów parse5; 133 znaczników img, wszystkie ze źródeł do-ai.
-Zdjęcia: 67/67 plików źródłowych użytych; pliki, alt i wymiary sprawdzone.
+HTML: 0 błędów parse5; 157 znaczników img, wszystkie ze źródeł do-ai.
+Zdjęcia: 79/79 plików źródłowych użytych; pliki, alt i wymiary sprawdzone.
 Zakładki: 5 ról tab i 5 statycznych paneli.
 Kotwice: 0 uszkodzonych; tekst: 0 nadmiarowych słów.
 CSS: promienie i tokeny zaokrągleń sprawdzone; url(): brak.
 Liczby niedozwolone: 0.
 Mobile 360 px: html 360/360, body 360/360.
 Wniosek: wariant A zachowuje jedną sekcję pomieszczeń z zakładkami; starsze karty kategorii pominięto.
-Wniosek: podpisy przedpokoju (LINATE, L'HOMBRE, SLIM, HOME) przypisane wg kolejności zdjęć i opisów serii na stronie źródłowej.
-UWAGA: HTML ma 133 znaczników img przy obecnych galeriach.
-UWAGA: Katalog do-ai ma teraz 67 zdjęć, zamiast bazowych 33.
+LUKA: galeria przedpokoju nie ma nazw kolekcji w źródle; podpisy pozostają puste.
+UWAGA: HTML ma 157 znaczników img przy obecnych galeriach.
+UWAGA: Katalog do-ai ma teraz 79 zdjęć, zamiast bazowych 33.

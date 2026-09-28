@@ -23,55 +23,64 @@ const ROOMS = [
 
 const ROOM_CAPTIONS = {
   'pokoj-dzienny': {
-    '01_cortina': "kolekcja CORTINA",
+    '01_toronto': "kolekcja TORONTO",
     '02_toronto': "kolekcja TORONTO",
     '03_toronto': "kolekcja TORONTO",
-    '04_toronto': "kolekcja TORONTO",
+    '04_shetland': "kolekcja SHETLAND",
     '05_shetland': "kolekcja SHETLAND",
     '06_shetland': "kolekcja SHETLAND",
-    '07_shetland': "kolekcja SHETLAND",
+    '07_summer': "kolekcja SUMMER",
     '08_summer': "kolekcja SUMMER",
     '09_summer': "kolekcja SUMMER",
     '10_summer': "kolekcja SUMMER",
-    '11_summer': "kolekcja SUMMER",
+    '11_linate': "kolekcja LINATE",
     '12_linate': "kolekcja LINATE",
     '13_linate': "kolekcja LINATE",
-    '14_linate': "kolekcja LINATE",
+    '14_forest': "kolekcja FOREST",
     '15_forest': "kolekcja FOREST",
     '16_forest': "kolekcja FOREST",
     '17_forest': "kolekcja FOREST",
     '18_forest': "kolekcja FOREST",
     '19_pello': "kolekcja PELLO",
     '20_imperial': "kolekcja IMPERIAL",
-    '21_imperial-new': "kolekcja IMPERIAL NEW"
+    '21_imperial-new': "kolekcja IMPERIAL NEW",
+    '22_imperial-new': "kolekcja IMPERIAL NEW",
+    '23_arko': "kolekcja ARKO",
+    '24_cortina': "kolekcja CORTINA"
   },
   'jadalnia': {
-    '01_arko': "jadalnia ARKO",
-    '02_naomi': "jadalnia NAOMI",
-    '03_summer': "jadalnia SUMMER",
-    '04_nicol': "jadalnia NICOL",
+    '01_naomi': "jadalnia NAOMI",
+    '02_summer': "jadalnia SUMMER",
+    '03_nicol': "jadalnia NICOL",
+    '04_pello': "jadalnia PELLO",
     '05_pello': "jadalnia PELLO",
     '06_imperial': "jadalnia IMPERIAL",
-    '07_linate': "jadalnia LINATE",
-    '08_cortina': "jadalnia CORTINA"
+    '07_imperial': "jadalnia IMPERIAL",
+    '08_linate': "jadalnia LINATE",
+    '09_cortina': "jadalnia CORTINA",
+    '10_arko': "jadalnia ARKO"
   },
   'sypialnia': {
-    '01_linate': "sypialnia LINATE",
-    '02_naomi': "sypialnia NAOMI",
-    '03_naomi': "sypialnia NAOMI",
-    '04_lionel': "sypialnia LIONEL",
-    '05_lionel': "sypialnia LIONEL",
-    '06_nicol': "sypialnia NICOL",
-    '07_nicol': "sypialnia NICOL",
-    '08_linate': "sypialnia LINATE",
-    '09_pello': "sypialnia PELLO",
-    '10_pello': "sypialnia PELLO",
-    '11_forest': "kolekcja FOREST",
-    '12_forest': "kolekcja FOREST",
-    '13_forest': "kolekcja FOREST",
-    '14_forest': "kolekcja FOREST",
-    '15_aspen': "łóżko ASPEN",
-    '16_tokyo': "łóżko TOKYO"
+    '04_naomi': "sypialnia NAOMI",
+    '05_naomi': "sypialnia NAOMI",
+    '06_naomi': "sypialnia NAOMI",
+    '07_lionel': "sypialnia LIONEL",
+    '08_lionel': "sypialnia LIONEL",
+    '09_lionel': "sypialnia LIONEL",
+    '10_nicol': "sypialnia NICOL",
+    '11_nicol': "sypialnia NICOL",
+    '12_nicol': "sypialnia NICOL",
+    '13_linate': "sypialnia LINATE",
+    '14_linate': "sypialnia LINATE",
+    '15_pello': "sypialnia PELLO",
+    '16_pello': "sypialnia PELLO",
+    '17_forest': "kolekcja FOREST",
+    '18_forest': "kolekcja FOREST",
+    '19_forest': "kolekcja FOREST",
+    '20_forest': "kolekcja FOREST",
+    '21_forest': "kolekcja FOREST",
+    '22_aspen': "łóżko ASPEN",
+    '23_tokyo': "łóżko TOKYO"
   },
   'pokoj-dzieciecy': {
     '01_angel': "kolekcja ANGEL",
@@ -84,14 +93,7 @@ const ROOM_CAPTIONS = {
     '08_montana': "narożnik MONTANA",
     '09_trixi': "kanapa TRIXI"
   },
-  'przedpokoj': {
-    '01_linate': "LINATE",
-    '02_lhombre': "L'HOMBRE",
-    '03_lhombre': "L'HOMBRE",
-    '04_slim': "SLIM",
-    '05_home': "HOME",
-    '06_home': "HOME"
-  }
+  'przedpokoj': {}
 };
 const PRODUCT_COPY = {
   '01_komplety-wypoczynkowe': {
@@ -444,7 +446,7 @@ async function build() {
   const imageCount = 1 + products.length + rooms.reduce((total, room) => total + room.items.length, 0);
   console.log(`Zbudowano onepage/dist: ${rooms.length} zakładek, ${products.length} mebli wypoczynkowych, ${imageCount} zdjęć.`);
   console.log('Wniosek: zachowano wariant A; sekcja kart kategorii ze starszej specyfikacji nie wchodzi do finalnego briefu.');
-  console.log("wniosek: podpisy przedpokoju (LINATE, L'HOMBRE, SLIM, HOME) przypisane wg kolejności zdjęć i opisów serii na stronie przedpokoju.");
+  console.log('LUKA: zdjęcia przedpokoju nie mają przypisanych nazw kolekcji, więc ich podpisy pozostają puste.');
 }
 
 if (require.main === module) {
